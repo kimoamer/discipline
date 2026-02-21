@@ -1,0 +1,80 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-02-21 16:26:00.149693",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "enable_payroll_integration",
+  "occurrence_window_months",
+  "max_occurrence_level",
+  "default_deduction_salary_component",
+  "require_payroll_period_selection",
+  "block_duplicates_same_day"
+ ],
+ "fields": [
+  {
+   "default": "1",
+   "fieldname": "enable_payroll_integration",
+   "fieldtype": "Check",
+   "label": "Enable Payroll Integration"
+  },
+  {
+   "default": "12",
+   "fieldname": "occurrence_window_months",
+   "fieldtype": "Int",
+   "label": "Occurrence Window (Months)"
+  },
+  {
+   "default": "5",
+   "fieldname": "max_occurrence_level",
+   "fieldtype": "Int",
+   "label": "Max Occurrence Level"
+  },
+  {
+   "fieldname": "default_deduction_salary_component",
+   "fieldtype": "Link",
+   "label": "Default Deduction Salary Component",
+   "options": "Salary Component"
+  },
+  {
+   "default": "0",
+   "fieldname": "require_payroll_period_selection",
+   "fieldtype": "Check",
+   "label": "Require Payroll Period Selection"
+  },
+  {
+   "default": "1",
+   "fieldname": "block_duplicates_same_day",
+   "fieldtype": "Check",
+   "label": "Block Duplicates Same Day"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-02-21 16:26:00.149693",
+ "modified_by": "Administrator",
+ "module": "Discipline",
+ "name": "Discipline Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
