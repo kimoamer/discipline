@@ -10,6 +10,22 @@ frappe.ui.form.on("Disciplinary Incident", {
     },
     incident_date: function (frm) {
         get_recommendation(frm);
+    },
+    setup: function (frm) {
+        frm.set_query("recommended_salary_component", function () {
+            return {
+                filters: {
+                    type: "Deduction"
+                }
+            };
+        });
+        frm.set_query("final_salary_component", function () {
+            return {
+                filters: {
+                    type: "Deduction"
+                }
+            };
+        });
     }
 });
 

@@ -81,7 +81,8 @@ class DisciplinaryIncident(Document):
             # Try to get active salary structure assignment to compute daily rate
             assignment = frappe.db.get_value("Salary Structure Assignment", 
                 {"employee": self.employee, "docstatus": 1, "is_active": 1}, 
-                "base")
+                "base",
+                order_by="from_date desc")
             if assignment:
                 # rough daily rate
                 daily_rate = flt(assignment) / 30.0

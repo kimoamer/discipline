@@ -1,8 +1,8 @@
 app_name = "discipline"
 app_title = "Disciplinary Management"
-app_publisher = "RootRise"
+app_publisher = "Hak3em"
 app_description = "Disciplinary & Penalty Management App"
-app_email = "admin@rootrise.io"
+app_email = "a.amer@innomate-tech.com"
 app_license = "mit"
 
 # Apps
