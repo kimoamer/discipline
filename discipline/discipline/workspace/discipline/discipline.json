@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\": \"hr_dash\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Discipline</b></span>\", \"col\": 12}}, {\"id\": \"hr_sh_s\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Discipline Settings\", \"col\": 3}}, {\"id\": \"hr_sh_o\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Offence\", \"col\": 3}}, {\"id\": \"hr_sh_i\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Disciplinary Incident\", \"col\": 3}}, {\"id\": \"hr_sh_grv\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Disciplinary Grievance\", \"col\": 3}}, {\"id\": \"hr_sh_inv\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Disciplinary Investigation\", \"col\": 3}}, {\"id\": \"hr_sh_med\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Restorative Mediation\", \"col\": 3}}]",
+ "content": "[{\"id\": \"header_config\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Configuration</b></span>\", \"col\": 12}}, {\"id\": \"sh_ds\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Discipline Settings\", \"col\": 3}}, {\"id\": \"sh_off\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Offence\", \"col\": 3}}, {\"id\": \"header_incident\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Incident Management</b></span>\", \"col\": 12}}, {\"id\": \"sh_inc\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Disciplinary Incident\", \"col\": 3}}, {\"id\": \"sh_grv\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Disciplinary Grievance\", \"col\": 3}}, {\"id\": \"sh_inv\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Disciplinary Investigation\", \"col\": 3}}, {\"id\": \"sh_app\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Disciplinary Appeal\", \"col\": 3}}, {\"id\": \"sh_med\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Restorative Mediation\", \"col\": 3}}, {\"id\": \"header_perf\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Performance</b></span>\", \"col\": 12}}, {\"id\": \"sh_pip\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Performance Improvement Plan\", \"col\": 3}}]",
  "creation": "2026-02-22 14:26:09.726837",
  "custom_blocks": [],
  "docstatus": 0,
@@ -12,7 +12,7 @@
  "is_hidden": 0,
  "label": "Discipline",
  "links": [],
- "modified": "2026-02-26 15:24:45.991313",
+ "modified": "2026-02-26 16:35:01.001371",
  "modified_by": "Administrator",
  "module": "Discipline",
  "name": "Discipline",
@@ -24,6 +24,24 @@
  "roles": [],
  "sequence_id": 0.0,
  "shortcuts": [
+  {
+   "doc_view": "List",
+   "label": "Discipline Settings",
+   "link_to": "Discipline Settings",
+   "type": "DocType"
+  },
+  {
+   "doc_view": "List",
+   "label": "Offence",
+   "link_to": "Offence",
+   "type": "DocType"
+  },
+  {
+   "doc_view": "List",
+   "label": "Disciplinary Incident",
+   "link_to": "Disciplinary Incident",
+   "type": "DocType"
+  },
   {
    "doc_view": "List",
    "label": "Disciplinary Grievance",
@@ -38,8 +56,20 @@
   },
   {
    "doc_view": "List",
+   "label": "Disciplinary Appeal",
+   "link_to": "Disciplinary Appeal",
+   "type": "DocType"
+  },
+  {
+   "doc_view": "List",
    "label": "Restorative Mediation",
    "link_to": "Restorative Mediation",
+   "type": "DocType"
+  },
+  {
+   "doc_view": "List",
+   "label": "Performance Improvement Plan",
+   "link_to": "Performance Improvement Plan",
    "type": "DocType"
   }
  ],
