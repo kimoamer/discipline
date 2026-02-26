@@ -14,7 +14,8 @@
   "investigator",
   "findings",
   "conclusion",
-  "status"
+  "status",
+  "employee"
  ],
  "fields": [
   {
@@ -67,12 +68,20 @@
    "fieldtype": "Select",
    "label": "Status",
    "options": "Ongoing\nCompleted"
+  },
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Employee",
+   "options": "Employee",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-02-26 14:13:51.360082",
+ "modified": "2026-02-26 16:44:54.850027",
  "modified_by": "Administrator",
  "module": "Discipline",
  "name": "Disciplinary Investigation",
