@@ -2,7 +2,39 @@
 
 Welcome to the Disciplinary Management App! This app integrates natively with Frappe HR (HRMS) to help manage company policy violations, track offense occurrences automatically, and apply calculated penalties (including payroll deductions). 
 
-This guide will walk you through setting up and using the app.
+## 🌟 The New Vision: Restorative Justice & Due Process
+
+Modern HR practices have evolved beyond purely reactive and punitive measures. This app has been explicitly leveled-up to implement a **Restorative Justice and Comprehensive Due Process** model. We believe in transparency, employee voice, and relationship repair.
+
+To achieve this, the app now separates investigations from penalties and allows for alternative resolutions:
+1. **Disciplinary Grievance**: Proactive reporting where employees have a formal voice.
+2. **Disciplinary Investigation**: Objective fact-finding and evidence logging detached from final actions to ensure legal due process.
+3. **Disciplinary Incident**: The formal record of an offense and penalty (if applicable).
+4. **Restorative Mediation**: A structured approach to conflict resolution focusing on healing relationships rather than merely issuing deductions.
+
+### System Flow
+```text
+  +-----------------------+       +----------------------------+
+  | Disciplinary Grievance| ----> | Disciplinary Investigation |
+  | (Employee Voice)      |       | (Fact-Finding & Evidence)  |
+  +-----------+-----------+       +-------------+--------------+
+              |                                 |
+              |       +-------------------------+
+              |       |
+              v       v
+  +-------------------------+     +--------------------------+
+  | Disciplinary Incident   |     | Restorative Mediation    |
+  | (Formal Record/Penalty) | OR  | (Relationship Repair)    |
+  +-----------+-------------+     +--------------------------+
+              |
+              v
+  +-------------------------+
+  | Payroll Integration     |
+  | (Additional Salary)     |
+  +-------------------------+
+```
+
+This guide will walk you through setting up and using the app under this modern paradigm.
 
 ## Prerequisites
 
