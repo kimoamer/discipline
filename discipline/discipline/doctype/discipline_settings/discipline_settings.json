@@ -6,49 +6,79 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "enable_payroll_integration",
+  "sb_general",
   "occurrence_window_months",
   "max_occurrence_level",
+  "cb_general_1",
+  "block_duplicates_same_day",
+  "sb_payroll",
+  "enable_payroll_integration",
   "default_deduction_salary_component",
-  "require_payroll_period_selection",
-  "block_duplicates_same_day"
+  "cb_payroll_1",
+  "require_payroll_period_selection"
  ],
  "fields": [
   {
-   "default": "1",
-   "fieldname": "enable_payroll_integration",
-   "fieldtype": "Check",
-   "label": "Enable Payroll Integration"
+   "fieldname": "sb_general",
+   "fieldtype": "Section Break",
+   "label": "General"
   },
   {
    "default": "12",
    "fieldname": "occurrence_window_months",
    "fieldtype": "Int",
-   "label": "Occurrence Window (Months)"
+   "label": "Occurrence Window (Months)",
+   "description": "Number of months to look back when counting repeat offences."
   },
   {
    "default": "5",
    "fieldname": "max_occurrence_level",
    "fieldtype": "Int",
-   "label": "Max Occurrence Level"
+   "label": "Max Occurrence Level",
+   "description": "Maximum escalation level for offence occurrences."
   },
   {
-   "fieldname": "default_deduction_salary_component",
-   "fieldtype": "Link",
-   "label": "Default Deduction Salary Component",
-   "options": "Salary Component"
-  },
-  {
-   "default": "0",
-   "fieldname": "require_payroll_period_selection",
-   "fieldtype": "Check",
-   "label": "Require Payroll Period Selection"
+   "fieldname": "cb_general_1",
+   "fieldtype": "Column Break"
   },
   {
    "default": "1",
    "fieldname": "block_duplicates_same_day",
    "fieldtype": "Check",
-   "label": "Block Duplicates Same Day"
+   "label": "Block Duplicates Same Day",
+   "description": "Prevent recording the same offence for the same employee on the same day."
+  },
+  {
+   "fieldname": "sb_payroll",
+   "fieldtype": "Section Break",
+   "label": "Payroll Integration"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_payroll_integration",
+   "fieldtype": "Check",
+   "label": "Enable Payroll Integration",
+   "description": "Automatically create Additional Salary deductions when incidents are submitted."
+  },
+  {
+   "fieldname": "default_deduction_salary_component",
+   "fieldtype": "Link",
+   "label": "Default Deduction Salary Component",
+   "options": "Salary Component",
+   "depends_on": "eval:doc.enable_payroll_integration",
+   "mandatory_depends_on": "eval:doc.enable_payroll_integration"
+  },
+  {
+   "fieldname": "cb_payroll_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "require_payroll_period_selection",
+   "fieldtype": "Check",
+   "label": "Require Payroll Period Selection",
+   "depends_on": "eval:doc.enable_payroll_integration",
+   "description": "Force users to select a payroll period on incidents instead of using the incident date."
   }
  ],
  "grid_page_length": 50,

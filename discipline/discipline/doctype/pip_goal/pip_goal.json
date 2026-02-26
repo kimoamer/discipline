@@ -8,7 +8,8 @@
  "field_order": [
   "objective",
   "metric",
-  "target_date"
+  "target_date",
+  "status"
  ],
  "fields": [
   {
@@ -29,6 +30,14 @@
    "fieldtype": "Date",
    "in_list_view": 1,
    "label": "Target Date"
+  },
+  {
+   "default": "Pending",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Pending\nIn Progress\nMet\nNot Met"
   }
  ],
  "grid_page_length": 50,

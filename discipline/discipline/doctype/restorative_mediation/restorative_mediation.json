@@ -8,15 +8,28 @@
  "engine": "InnoDB",
  "field_order": [
   "naming_series",
-  "date",
+  "sb_reference",
+  "incident_ref",
+  "cb_reference_1",
+  "grievance_ref",
+  "company",
+  "sb_parties",
   "party_1",
+  "party_1_name",
+  "cb_parties_1",
   "party_2",
-  "mediator",
-  "mediation_summary",
-  "agreements_reached",
-  "follow_up_date",
+  "party_2_name",
+  "sb_mediation",
+  "date",
   "status",
-  "incident_ref"
+  "cb_mediation_1",
+  "mediator",
+  "mediator_name",
+  "follow_up_date",
+  "sb_summary",
+  "mediation_summary",
+  "sb_agreements",
+  "agreements_reached"
  ],
  "fields": [
   {
@@ -27,11 +40,39 @@
    "options": "HR-MED-.YYYY.-.#####"
   },
   {
-   "fieldname": "date",
-   "fieldtype": "Date",
+   "fieldname": "sb_reference",
+   "fieldtype": "Section Break",
+   "label": "Reference"
+  },
+  {
+   "fieldname": "incident_ref",
+   "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Date",
-   "reqd": 1
+   "label": "Disciplinary Incident",
+   "options": "Disciplinary Incident"
+  },
+  {
+   "fieldname": "cb_reference_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "grievance_ref",
+   "fieldtype": "Link",
+   "label": "Disciplinary Grievance",
+   "options": "Disciplinary Grievance"
+  },
+  {
+   "fetch_from": "incident_ref.company",
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sb_parties",
+   "fieldtype": "Section Break",
+   "label": "Parties"
   },
   {
    "fieldname": "party_1",
@@ -42,6 +83,17 @@
    "reqd": 1
   },
   {
+   "fetch_from": "party_1.employee_name",
+   "fieldname": "party_1_name",
+   "fieldtype": "Data",
+   "label": "Party 1 Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb_parties_1",
+   "fieldtype": "Column Break"
+  },
+  {
    "fieldname": "party_2",
    "fieldtype": "Link",
    "in_list_view": 1,
@@ -50,22 +102,49 @@
    "reqd": 1
   },
   {
+   "fetch_from": "party_2.employee_name",
+   "fieldname": "party_2_name",
+   "fieldtype": "Data",
+   "label": "Party 2 Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sb_mediation",
+   "fieldtype": "Section Break",
+   "label": "Mediation Details"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Mediation Date",
+   "reqd": 1
+  },
+  {
+   "default": "Scheduled",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Scheduled\nCompleted\nFailed"
+  },
+  {
+   "fieldname": "cb_mediation_1",
+   "fieldtype": "Column Break"
+  },
+  {
    "fieldname": "mediator",
    "fieldtype": "Link",
-   "in_list_view": 1,
    "label": "Mediator",
    "options": "Employee",
    "reqd": 1
   },
   {
-   "fieldname": "mediation_summary",
-   "fieldtype": "Text Editor",
-   "label": "Mediation Summary"
-  },
-  {
-   "fieldname": "agreements_reached",
-   "fieldtype": "Text Editor",
-   "label": "Agreements Reached"
+   "fetch_from": "mediator.employee_name",
+   "fieldname": "mediator_name",
+   "fieldtype": "Data",
+   "label": "Mediator Name",
+   "read_only": 1
   },
   {
    "fieldname": "follow_up_date",
@@ -73,17 +152,24 @@
    "label": "Follow Up Date"
   },
   {
-   "default": "Scheduled",
-   "fieldname": "status",
-   "fieldtype": "Select",
-   "label": "Status",
-   "options": "Scheduled\nCompleted\nFailed"
+   "fieldname": "sb_summary",
+   "fieldtype": "Section Break",
+   "label": "Mediation Summary"
   },
   {
-   "fieldname": "incident_ref",
-   "fieldtype": "Link",
-   "label": "Incident Ref",
-   "options": "Disciplinary Incident"
+   "fieldname": "mediation_summary",
+   "fieldtype": "Text Editor",
+   "label": "Mediation Summary"
+  },
+  {
+   "fieldname": "sb_agreements",
+   "fieldtype": "Section Break",
+   "label": "Agreements Reached"
+  },
+  {
+   "fieldname": "agreements_reached",
+   "fieldtype": "Text Editor",
+   "label": "Agreements Reached"
   }
  ],
  "grid_page_length": 50,

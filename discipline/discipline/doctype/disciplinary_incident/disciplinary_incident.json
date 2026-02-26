@@ -7,27 +7,45 @@
     "editable_grid": 1,
     "engine": "InnoDB",
     "field_order": [
+        "sb_employee",
         "employee",
+        "employee_name",
+        "cb_employee_1",
         "company",
+        "department",
+        "designation",
+        "sb_incident",
         "offence",
+        "offence_category",
+        "cb_incident_1",
         "incident_date",
+        "reported_by",
+        "sb_incident_details",
         "details",
         "attachments",
         "sb_computed",
         "occurrence_no",
         "recommended_penalty_text",
+        "cb_computed_1",
         "recommended_days_deducted",
         "recommended_salary_component",
         "sb_final",
         "final_penalty_text",
+        "cb_final_1",
         "final_days_deducted",
         "final_salary_component",
         "sb_integration",
         "additional_salary_ref",
+        "cb_integration_1",
         "payroll_period",
         "amended_from"
     ],
     "fields": [
+        {
+            "fieldname": "sb_employee",
+            "fieldtype": "Section Break",
+            "label": "Employee Details"
+        },
         {
             "fieldname": "employee",
             "fieldtype": "Link",
@@ -37,11 +55,44 @@
             "reqd": 1
         },
         {
+            "fetch_from": "employee.employee_name",
+            "fieldname": "employee_name",
+            "fieldtype": "Data",
+            "in_list_view": 1,
+            "label": "Employee Name",
+            "read_only": 1
+        },
+        {
+            "fieldname": "cb_employee_1",
+            "fieldtype": "Column Break"
+        },
+        {
             "fetch_from": "employee.company",
             "fieldname": "company",
             "fieldtype": "Link",
             "label": "Company",
-            "options": "Company"
+            "options": "Company",
+            "read_only": 1
+        },
+        {
+            "fetch_from": "employee.department",
+            "fieldname": "department",
+            "fieldtype": "Link",
+            "label": "Department",
+            "options": "Department",
+            "read_only": 1
+        },
+        {
+            "fetch_from": "employee.designation",
+            "fieldname": "designation",
+            "fieldtype": "Data",
+            "label": "Designation",
+            "read_only": 1
+        },
+        {
+            "fieldname": "sb_incident",
+            "fieldtype": "Section Break",
+            "label": "Incident Details"
         },
         {
             "fieldname": "offence",
@@ -52,11 +103,33 @@
             "reqd": 1
         },
         {
+            "fetch_from": "offence.category",
+            "fieldname": "offence_category",
+            "fieldtype": "Data",
+            "label": "Offence Category",
+            "read_only": 1
+        },
+        {
+            "fieldname": "cb_incident_1",
+            "fieldtype": "Column Break"
+        },
+        {
             "fieldname": "incident_date",
             "fieldtype": "Date",
             "in_list_view": 1,
             "label": "Incident Date",
             "reqd": 1
+        },
+        {
+            "fieldname": "reported_by",
+            "fieldtype": "Link",
+            "label": "Reported By",
+            "options": "Employee"
+        },
+        {
+            "fieldname": "sb_incident_details",
+            "fieldtype": "Section Break",
+            "label": "Description & Evidence"
         },
         {
             "fieldname": "details",
@@ -71,7 +144,7 @@
         {
             "fieldname": "sb_computed",
             "fieldtype": "Section Break",
-            "label": "Computed Information"
+            "label": "Computed Recommendation"
         },
         {
             "fieldname": "occurrence_no",
@@ -82,8 +155,12 @@
         {
             "fieldname": "recommended_penalty_text",
             "fieldtype": "Small Text",
-            "label": "Recommended Penalty Text",
+            "label": "Recommended Penalty",
             "read_only": 1
+        },
+        {
+            "fieldname": "cb_computed_1",
+            "fieldtype": "Column Break"
         },
         {
             "fieldname": "recommended_days_deducted",
@@ -106,7 +183,11 @@
         {
             "fieldname": "final_penalty_text",
             "fieldtype": "Small Text",
-            "label": "Final Penalty Text"
+            "label": "Final Penalty"
+        },
+        {
+            "fieldname": "cb_final_1",
+            "fieldtype": "Column Break"
         },
         {
             "fieldname": "final_days_deducted",
@@ -122,14 +203,19 @@
         {
             "fieldname": "sb_integration",
             "fieldtype": "Section Break",
-            "label": "Integration"
+            "label": "Payroll Integration",
+            "depends_on": "eval:doc.docstatus >= 1"
         },
         {
             "fieldname": "additional_salary_ref",
             "fieldtype": "Link",
-            "label": "Additional Salary Ref",
+            "label": "Additional Salary",
             "options": "Additional Salary",
             "read_only": 1
+        },
+        {
+            "fieldname": "cb_integration_1",
+            "fieldtype": "Column Break"
         },
         {
             "fieldname": "payroll_period",

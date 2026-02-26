@@ -1,138 +1,282 @@
-# Disciplinary Management App - User Manual
+# Disciplinary Management App
 
-Welcome to the Disciplinary Management App! This app integrates natively with Frappe HR (HRMS) to help manage company policy violations, track offense occurrences automatically, and apply calculated penalties (including payroll deductions). 
+A Frappe HR add-on for managing workplace discipline with a **restorative justice** approach. It tracks offences and occurrences automatically, calculates recommended penalties, integrates with payroll for deductions, and provides structured paths for grievances, investigations, appeals, mediation, and performance improvement plans.
 
-## 🌟 The New Vision: Restorative Justice & Due Process
+## System Flow
 
-Modern HR practices have evolved beyond purely reactive and punitive measures. This app has been explicitly leveled-up to implement a **Restorative Justice and Comprehensive Due Process** model. We believe in transparency, employee voice, and relationship repair.
-
-To achieve this, the app now separates investigations from penalties and allows for alternative resolutions:
-1. **Disciplinary Grievance**: Proactive reporting where employees have a formal voice.
-2. **Disciplinary Investigation**: Objective fact-finding and evidence logging detached from final actions to ensure legal due process.
-3. **Disciplinary Incident**: The formal record of an offense and penalty (if applicable).
-4. **Restorative Mediation**: A structured approach to conflict resolution focusing on healing relationships rather than merely issuing deductions.
-
-### System Flow
 ```text
-  +-------------------------+
-  | Disciplinary Incident   |
-  | (Formal Record of Event)|
-  +-----------+-------------+
-              |
-              +---------------------------------+
-              |                                 |
-              v                                 v
-  +-----------------------+       +----------------------------+
-  | Disciplinary Grievance| ----> | Disciplinary Investigation |
-  | (Employee Voice)      |       | (Fact-Finding & Evidence)  |
-  +-----------------------+       +-------------+--------------+
-                                                |
-                                  +-------------+---------------+
-                                  |                             |
-                                  v                             v
-                      +-------------------------+     +--------------------------+
-                      | Payroll Integration     |     | Restorative Mediation    |
-                      | (Penalty/Deduction)     | OR  | (Relationship Repair)    |
-                      +-------------------------+     +--------------------------+
+Disciplinary Grievance ──┐
+(employee-filed report)  │
+                         ├──► Disciplinary Investigation
+                         │    (fact-finding & evidence)
+Disciplinary Incident ───┘
+(formal offence record)
+        │
+        ├──► Disciplinary Appeal       (challenge the decision)
+        ├──► Performance Improvement   (corrective action plan)
+        │    Plan (PIP)
+        └──► Restorative Mediation     (relationship repair)
 ```
 
-This guide will walk you through setting up and using the app under this modern paradigm.
+**Key relationships:**
+
+- **Incident** is the central record. Investigations, Appeals, PIPs, and Mediations all link back to it.
+- **Grievance** is the employee-initiated entry point. Investigations and Mediations can also link to a Grievance.
+- **Offence** defines the penalty matrix. Incidents reference an Offence to auto-calculate occurrence levels and recommended penalties.
+
+---
 
 ## Prerequisites
 
-Before using the Disciplinary Management app, ensure the following:
-1. **Frappe HR (HRMS)** is installed and configured on your site.
-2. Employees and Company structures are correctly set up.
-3. Salary Components are defined (specifically, setting up a Salary Component for deductions).
+1. **Frappe HR (HRMS)** installed and configured.
+2. Employees, Company, and Department structures set up.
+3. At least one **Salary Component** of type *Deduction* configured (for payroll integration).
 
 ---
 
-## 1. Initial Setup
+## 1. Discipline Settings
 
-### Step 1: Configure Discipline Settings
-1. In the search bar at the top, type **Discipline Settings** and press Enter.
-2. Fill out the configuration options:
-   - **Enable Payroll Integration**: Check this box if you want the app to automatically create an **Additional Salary** (deduction) document when a monetary penalty is issued.
-   - **Occurrence Window (Months)**: Enter the number of months to look back for repeat offenses. For example, `12` means the system will calculate occurrence levels (1st, 2nd, etc.) based on the past year.
-   - **Max Occurrence Level**: Set the maximum escalation level (usually 5).
-   - **Default Deduction Salary Component**: Select the default HRMS Salary Component to use when deducting pay for penalties. (This should be an "Earning/Deduction" component configured as a deduction in HRMS).
-   - **Require Payroll Period Selection**: Check this to force users to manually select a payroll period instead of deriving it from the incident date.
-   - **Block Duplicates Same Day**: Prevents the creation of two identical incidents for the same employee and the same offense on the same day.
-3. **Save** the settings.
+Search for **Discipline Settings** in the Awesome Bar.
 
----
+### General Section
 
-## 2. Defining Offences & Penalties
+| Field | Description |
+|---|---|
+| **Occurrence Window (Months)** | How far back to look when counting repeat offences (default: 12). |
+| **Max Occurrence Level** | Maximum escalation level before the count stops increasing (default: 5). |
+| **Block Duplicates Same Day** | Prevents recording the same offence for the same employee on the same day. |
 
-You must set up the rules and penalty structures for your organization.
+### Payroll Integration Section
 
-### Step 1: Create an Offence
-1. In the search bar, type **Offence List** and press Enter.
-2. Click **Add Offence**.
-3. Fill out the basic details:
-   - **Title**: E.g., "Late Arrival".
-   - **Category**: Select the severity level (e.g., Minor, Major, Critical).
-   - **Company**: (Optional) Assign this rule to a specific company if managing multiple companies.
-   - **Is Active**: Ensure this is checked.
-
-### Step 2: Define the Penalty Matrix
-In the lower section of the Offence form, fill out the **Penalties** table to define what happens at each occurrence level:
-1. **Occurrence No**: Enter the level (1 for first occurrence, 2 for second time, etc.).
-2. **Penalty Text**: Enter a written warning or note (e.g., "Verbal Warning", "Written Warning").
-3. **Days Deducted**: Enter the number of days of pay to deduct. Leave as `0` for warnings without pay cuts.
-4. **Salary Component Override**: (Optional) Provide a specific Salary Component for this precise penalty if it differs from the default set in *Discipline Settings*.
-5. **Notes**: Add any internal HR notes.
-
-Click **Save** when all levels are defined.
+| Field | Description |
+|---|---|
+| **Enable Payroll Integration** | Auto-create an Additional Salary (deduction) when an incident is submitted. |
+| **Default Deduction Salary Component** | The Salary Component used for deductions (filtered to Deduction type only). Required when payroll integration is enabled. |
+| **Require Payroll Period Selection** | Force users to pick a Payroll Period on the incident instead of using the incident date. |
 
 ---
 
-## 3. Recording a Disciplinary Incident
+## 2. Offences & Penalties
 
-When an employee commits an offense, supervisors or HR personnel will record it here.
+### Creating an Offence
 
-### Step 1: Create the Incident
-1. Search for **Disciplinary Incident List** and click **Add Disciplinary Incident**.
-2. Fill in the core details:
-   - **Employee**: Select the employee from the list.
-   - **Offence**: Select the offense they committed (e.g., "Late Arrival").
-   - **Incident Date**: The exact date the offense occurred.
-   - **Details/Attachments**: Add a description of the event or attach necessary proofs.
+Search for **Offence** and click **Add Offence**.
 
-### Step 2: Review Recommendations
-Once you select the Employee, Offence, and Date, the system automatically checks their history and fills out the **Computed Information** section:
-- **Occurrence No**: Auto-calculated based on past incidents within the window.
-- **Recommended Penalty**: Auto-pulled from the Offence matrix.
-- **Recommended Days Deducted & Salary Component**: Displays the suggested payroll action.
+| Field | Description |
+|---|---|
+| **Title** | Name of the offence (e.g. "Late Arrival"). Must be unique. |
+| **Category** | Severity: Minor, Major, or Critical. |
+| **Company** | (Optional) Restrict this offence to a specific company. |
+| **Is Active** | Only active offences appear in incident forms. |
+| **Max Occurrence Level** | Per-offence override for the global max level from settings. |
 
-### Step 3: Final Decision
-Under the **Final Decision** section, HR/Management can adjust the recommendation if necessary. By default, the system will copy the recommended values into the final fields upon saving.
-- If you wish to give a lesser or harsher penalty, manually adjust the `Final Penalty Text` or `Final Days Deducted` fields.
+### Penalty Matrix (child table)
 
-### Step 4: Submission and Payroll Integration
-1. **Save** the document. It is now in a Draft state.
-2. Click **Submit** to finalize the disciplinary incident. 
-   - **Note:** Submitted records are locked and cannot be edited.
-3. **Payroll Automation**: If you have *Payroll Integration* enabled and there are `Final Days Deducted` specified, the system will instantly and automatically generate an **Additional Salary** document for that employee based on their base salary rate.
-   - An `Additional Salary Ref` link will appear at the bottom of the incident form so you can track the deduction.
+Define what happens at each occurrence level:
 
-### Undoing an Incident
-If a submitted incident needs to be revoked:
-1. Click **Cancel** on the submitted Disciplinary Incident.
-2. The associated **Additional Salary** deduction document will be automatically canceled.
+| Field | Description |
+|---|---|
+| **Occurrence No** | The escalation level (1 = first time, 2 = second, etc.). |
+| **Penalty Text** | Description (e.g. "Verbal Warning", "Written Warning", "Termination"). |
+| **Days Deducted** | Number of pay-days to deduct. Leave at 0 for non-monetary penalties. |
+| **Salary Component Override** | Use a different Salary Component for this specific penalty (filtered to Deduction type). |
+| **Notes** | Internal HR notes. |
 
 ---
 
-## 4. Workflows & Permissions (Optional)
+## 3. Disciplinary Incident
 
-You can use standard Frappe tools to shape the approval process:
-- Navigate to **Role Permissions Manager** to restrict who can *Submit* vs who can *Create* incidents. For example, give Supervisors "Create" access but restrict "Submit" to HR Managers.
-- Navigate to **Workflow List** if you want to enforce a multi-step approval process (e.g., `Draft` -> `Supervisor Review` -> `HR Approval` -> `Submitted`).
+The core transactional document. It is **submittable** (Draft → Submitted → Cancelled).
+
+### Creating an Incident
+
+| Section | Field | Description |
+|---|---|---|
+| **Employee Details** | Employee | The offending employee (required). |
+| | Employee Name, Company, Department, Designation | Auto-fetched from the Employee record (read-only). |
+| **Incident Details** | Offence | Select from active offences (filtered by `is_active = 1`). |
+| | Offence Category | Auto-fetched from the Offence (read-only). |
+| | Incident Date | When the offence occurred (required). |
+| | Reported By | The employee who reported it (filtered to active employees). |
+| **Description & Evidence** | Details | Free-text description. |
+| | Attachments | Upload supporting evidence. |
+
+### Computed Recommendation (auto-filled)
+
+When Employee + Offence + Incident Date are set, the system calls the backend to:
+
+1. Count prior **submitted** incidents for the same employee + offence within the occurrence window.
+2. Look up the matching row in the offence's penalty matrix.
+3. Populate: **Occurrence No**, **Recommended Penalty**, **Recommended Days Deducted**, **Recommended Salary Component**.
+
+### Final Decision
+
+HR/Management can accept the recommendation (auto-copied) or override it:
+
+- **Final Penalty** — adjust the penalty text.
+- **Final Days Deducted** — increase or decrease the deduction.
+- **Final Salary Component** — use a different component.
+
+### Submission & Payroll
+
+1. **Save** → Draft.
+2. **Submit** → locks the record.
+   - If payroll integration is enabled and Final Days Deducted > 0 with a Final Salary Component, an **Additional Salary** document is auto-created.
+   - The link appears in the **Payroll Integration** section.
+   - **Payroll Period** can be selected to control which pay cycle the deduction falls in (filtered by company).
+3. **Cancel** → auto-cancels the linked Additional Salary.
+4. **Amend** → creates a corrected copy.
+
+### Duplicate Check
+
+If **Block Duplicates Same Day** is enabled in settings, the system prevents saving a second incident for the same employee + offence + date.
+
+### Dashboard
+
+From an Incident, the sidebar shows linked:
+- Disciplinary Investigations
+- Restorative Mediations
+- Disciplinary Appeals
+- Performance Improvement Plans
+
+---
+
+## 4. Disciplinary Grievance
+
+An employee-initiated report. Not submittable — uses a status workflow instead.
+
+| Section | Field | Description |
+|---|---|---|
+| **Filed By** | Employee / Employee Name | The employee filing the grievance. Company and Department auto-fetched. |
+| **Grievance Details** | Grievance Date | When the grievance is filed (required). |
+| | Status | Open → Investigating → Closed / Escalated. |
+| | Against Employee | The employee the grievance is against (filtered to exclude the filer). |
+| **Description** | Description | Rich-text description of the grievance (required). |
+
+### Validations
+- The filing employee and the accused employee cannot be the same person.
+
+### Dashboard
+From a Grievance, the sidebar shows linked Investigations and Mediations.
+
+---
+
+## 5. Disciplinary Investigation
+
+Objective fact-finding linked to an Incident and/or Grievance.
+
+| Section | Field | Description |
+|---|---|---|
+| **Reference** | Disciplinary Incident | Link to a submitted incident (filtered by `docstatus = 1`). |
+| | Disciplinary Grievance | Link to an open/investigating grievance (filtered by `status != Closed`). |
+| **Employee Details** | Employee / Employee Name | The employee being investigated. Auto-fetched when selecting an incident or grievance. Company and Department auto-fetched. |
+| **Investigation Details** | Investigation Date | Required. |
+| | Status | Ongoing → Completed. |
+| | Investigator / Investigator Name | The employee conducting the investigation (filtered to active employees). |
+| **Findings** | Findings | Rich-text editor for evidence and observations. |
+| **Conclusion** | Conclusion | Rich-text editor for the investigator's conclusion. |
+
+### Validations
+- At least one reference (Incident or Grievance) must be provided.
+- The employee must match the employee on the referenced Incident or Grievance.
+
+---
+
+## 6. Disciplinary Appeal
+
+Allows an employee to formally challenge an incident decision. **Submittable.**
+
+| Section | Field | Description |
+|---|---|---|
+| **Reference** | Disciplinary Incident | Link to a submitted incident (required, filtered by `docstatus = 1`). |
+| | Employee / Employee Name | Auto-fetched from the incident (read-only). |
+| **Employee Details** | Company, Department | Auto-fetched (collapsible). |
+| **Appeal Information** | Date of Appeal | Defaults to today (required). |
+| | Status | Pending → Upheld / Overturned / Modified. |
+| | Reviewer / Reviewer Name | The employee reviewing the appeal (filtered to active employees). |
+| **Appeal Details** | Appeal Reason | Free-text justification (required). |
+| **Decision** | Final Decision Notes | Required when status is Upheld, Overturned, or Modified. |
+
+### Validations
+- Employee must match the incident's employee.
+- Final Decision Notes are mandatory when the appeal status changes from Pending.
+
+---
+
+## 7. Performance Improvement Plan (PIP)
+
+A structured corrective action plan tied to an incident. **Submittable.**
+
+| Section | Field | Description |
+|---|---|---|
+| **Reference** | Disciplinary Incident | Link to a submitted incident (filtered by `docstatus = 1`). |
+| | Employee / Employee Name | Auto-fetched from the incident. |
+| **Employee Details** | Company, Department, Designation | Auto-fetched (collapsible). |
+| **Plan Details** | Manager / Manager Name | Supervising manager (filtered to active employees). |
+| | Status | Draft → Active → Successful / Failed. |
+| | Start Date / End Date | Plan duration (both required). |
+| **Goals** | Goals table (child: PIP Goal) | Each goal has: Objective (required), Metric, Target Date, Status (Pending / In Progress / Met / Not Met). |
+
+### Validations
+- End Date must be after Start Date.
+- Employee must match the incident's employee (when an incident is linked).
+
+---
+
+## 8. Restorative Mediation
+
+A structured path for conflict resolution focusing on relationship repair rather than punishment.
+
+| Section | Field | Description |
+|---|---|---|
+| **Reference** | Disciplinary Incident | Link to a submitted incident. |
+| | Disciplinary Grievance | Link to a grievance (filtered by `status != Closed`). |
+| | Company | Auto-fetched from the incident. |
+| **Parties** | Party 1 / Party 1 Name | First employee (filtered to active). |
+| | Party 2 / Party 2 Name | Second employee (filtered to active, excludes Party 1). |
+| **Mediation Details** | Mediation Date | Required. |
+| | Status | Scheduled → Completed / Failed. |
+| | Mediator / Mediator Name | The neutral facilitator (filtered to active employees). |
+| | Follow Up Date | Must be after the mediation date. |
+| **Mediation Summary** | Summary | Rich-text record of the session. |
+| **Agreements Reached** | Agreements | Rich-text record of what was agreed upon. |
+
+### Validations
+- Party 1 and Party 2 cannot be the same employee.
+- The Mediator cannot be either party.
+- Follow Up Date must be after the Mediation Date.
+
+---
+
+## 9. Reports
+
+### Disciplinary Consistency Report
+
+Compares **recommended** vs **final** penalties across submitted incidents. Useful for auditing whether managers are consistently applying the penalty matrix.
+
+**Filters:** Company, Date Range, Offence, Employee.
+
+**Chart:** Bar chart showing the variation (Final − Recommended days) per incident.
+
+---
+
+## 10. Permissions & Workflows
+
+Use standard Frappe tools:
+
+- **Role Permissions Manager** — control who can Create, Read, Write, Submit, Cancel each doctype. For example, give Supervisors Create access to Incidents but restrict Submit to HR Managers.
+- **Workflow Builder** — enforce multi-step approval flows (e.g. Draft → Supervisor Review → HR Approval → Submitted).
+
+All doctypes currently grant full access to the **System Manager** role. Add HR Manager, HR User, or custom roles as needed.
 
 ---
 
 ## Troubleshooting
 
-- **Payroll Deduction is Rs. 0.00:** Ensure the employee has an active `Salary Structure Assignment`. The system divides the base salary by 30 to calculate the daily deduction rate.
-- **Occurrence isn't escalating:** Check your `Discipline Settings` to ensure the `Occurrence Window (Months)` is wide enough, and verify that the previous incidents were formally **Submitted** (Drafts don't count towards the history).
-- **Duplicates blocked error:** If an employee genuinely commits the same offense twice in one day, temporarily turn off `Block Duplicates Same Day` in Discipline Settings.
+| Problem | Solution |
+|---|---|
+| **Payroll deduction amount is 0** | Ensure the employee has an active Salary Structure Assignment with a base salary. The system divides base by 30 for the daily rate. |
+| **Occurrence not escalating** | Verify prior incidents are **Submitted** (drafts don't count). Check that the Occurrence Window in settings is wide enough. |
+| **Duplicate blocked error** | The same employee + offence + date already exists. Disable "Block Duplicates Same Day" in settings if this is intentional. |
+| **Employee mismatch error** | When creating an Appeal, PIP, or Investigation, the employee must match the one on the linked Incident. Select the Incident first and the employee will auto-fill. |
+| **Offence not appearing** | Check that the Offence has `Is Active` checked. Only active offences appear in the Incident form. |

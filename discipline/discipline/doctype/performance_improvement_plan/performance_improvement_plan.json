@@ -7,19 +7,46 @@
     "editable_grid": 1,
     "engine": "InnoDB",
     "field_order": [
-        "employee",
+        "sb_reference",
         "disciplinary_incident",
+        "cb_reference_1",
+        "employee",
+        "employee_name",
+        "sb_employee_detail",
+        "company",
+        "department",
+        "cb_employee_detail_1",
+        "designation",
+        "sb_plan",
         "manager",
+        "manager_name",
         "status",
+        "cb_plan_1",
         "start_date",
         "end_date",
-        "sb_1",
+        "sb_goals",
         "goals",
-        "amended_from",
         "amended_from"
     ],
     "fields": [
         {
+            "fieldname": "sb_reference",
+            "fieldtype": "Section Break",
+            "label": "Reference"
+        },
+        {
+            "fieldname": "disciplinary_incident",
+            "fieldtype": "Link",
+            "in_list_view": 1,
+            "label": "Disciplinary Incident",
+            "options": "Disciplinary Incident"
+        },
+        {
+            "fieldname": "cb_reference_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fetch_from": "disciplinary_incident.employee",
             "fieldname": "employee",
             "fieldtype": "Link",
             "in_list_view": 1,
@@ -28,17 +55,63 @@
             "reqd": 1
         },
         {
-            "fieldname": "disciplinary_incident",
+            "fetch_from": "employee.employee_name",
+            "fieldname": "employee_name",
+            "fieldtype": "Data",
+            "in_list_view": 1,
+            "label": "Employee Name",
+            "read_only": 1
+        },
+        {
+            "fieldname": "sb_employee_detail",
+            "fieldtype": "Section Break",
+            "label": "Employee Details",
+            "collapsible": 1
+        },
+        {
+            "fetch_from": "employee.company",
+            "fieldname": "company",
             "fieldtype": "Link",
-            "label": "Disciplinary Incident",
-            "options": "Disciplinary Incident"
+            "label": "Company",
+            "options": "Company",
+            "read_only": 1
+        },
+        {
+            "fetch_from": "employee.department",
+            "fieldname": "department",
+            "fieldtype": "Link",
+            "label": "Department",
+            "options": "Department",
+            "read_only": 1
+        },
+        {
+            "fieldname": "cb_employee_detail_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fetch_from": "employee.designation",
+            "fieldname": "designation",
+            "fieldtype": "Data",
+            "label": "Designation",
+            "read_only": 1
+        },
+        {
+            "fieldname": "sb_plan",
+            "fieldtype": "Section Break",
+            "label": "Plan Details"
         },
         {
             "fieldname": "manager",
             "fieldtype": "Link",
-            "in_list_view": 1,
             "label": "Manager",
             "options": "Employee"
+        },
+        {
+            "fetch_from": "manager.employee_name",
+            "fieldname": "manager_name",
+            "fieldtype": "Data",
+            "label": "Manager Name",
+            "read_only": 1
         },
         {
             "default": "Draft",
@@ -47,6 +120,10 @@
             "in_list_view": 1,
             "label": "Status",
             "options": "Draft\nActive\nSuccessful\nFailed"
+        },
+        {
+            "fieldname": "cb_plan_1",
+            "fieldtype": "Column Break"
         },
         {
             "fieldname": "start_date",
@@ -62,7 +139,7 @@
             "reqd": 1
         },
         {
-            "fieldname": "sb_1",
+            "fieldname": "sb_goals",
             "fieldtype": "Section Break",
             "label": "Goals"
         },
@@ -71,15 +148,6 @@
             "fieldtype": "Table",
             "label": "Goals",
             "options": "PIP Goal"
-        },
-        {
-            "fieldname": "amended_from",
-            "fieldtype": "Link",
-            "label": "Amended From",
-            "no_copy": 1,
-            "options": "Performance Improvement Plan",
-            "print_hide": 1,
-            "read_only": 1
         },
         {
             "fieldname": "amended_from",

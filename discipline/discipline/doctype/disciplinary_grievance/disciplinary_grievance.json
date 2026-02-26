@@ -8,11 +8,20 @@
  "engine": "InnoDB",
  "field_order": [
   "naming_series",
-  "grievance_date",
+  "sb_employee",
   "employee",
+  "employee_name",
+  "cb_employee_1",
+  "company",
+  "department",
+  "sb_grievance",
+  "grievance_date",
+  "status",
+  "cb_grievance_1",
   "against_employee",
-  "description",
-  "status"
+  "against_employee_name",
+  "sb_description",
+  "description"
  ],
  "fields": [
   {
@@ -23,11 +32,9 @@
    "options": "HR-GRV-.YYYY.-.#####"
   },
   {
-   "fieldname": "grievance_date",
-   "fieldtype": "Date",
-   "in_list_view": 1,
-   "label": "Grievance Date",
-   "reqd": 1
+   "fieldname": "sb_employee",
+   "fieldtype": "Section Break",
+   "label": "Filed By"
   },
   {
    "fieldname": "employee",
@@ -38,24 +45,80 @@
    "reqd": 1
   },
   {
-   "fieldname": "against_employee",
-   "fieldtype": "Link",
-   "label": "Against Employee",
-   "options": "Employee"
+   "fetch_from": "employee.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Employee Name",
+   "read_only": 1
   },
   {
-   "fieldname": "description",
-   "fieldtype": "Text Editor",
+   "fieldname": "cb_employee_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "employee.company",
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.department",
+   "fieldname": "department",
+   "fieldtype": "Link",
+   "label": "Department",
+   "options": "Department",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sb_grievance",
+   "fieldtype": "Section Break",
+   "label": "Grievance Details"
+  },
+  {
+   "fieldname": "grievance_date",
+   "fieldtype": "Date",
    "in_list_view": 1,
-   "label": "Description",
+   "label": "Grievance Date",
    "reqd": 1
   },
   {
    "default": "Open",
    "fieldname": "status",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "label": "Status",
    "options": "Open\nInvestigating\nClosed\nEscalated"
+  },
+  {
+   "fieldname": "cb_grievance_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "against_employee",
+   "fieldtype": "Link",
+   "label": "Against Employee",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "against_employee.employee_name",
+   "fieldname": "against_employee_name",
+   "fieldtype": "Data",
+   "label": "Against Employee Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sb_description",
+   "fieldtype": "Section Break",
+   "label": "Description"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text Editor",
+   "label": "Description",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,

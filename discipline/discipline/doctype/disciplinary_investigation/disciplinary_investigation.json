@@ -8,14 +8,25 @@
  "engine": "InnoDB",
  "field_order": [
   "naming_series",
-  "investigation_date",
+  "sb_reference",
   "incident_ref",
   "grievance_ref",
-  "investigator",
-  "findings",
-  "conclusion",
+  "sb_employee",
+  "employee",
+  "employee_name",
+  "cb_employee_1",
+  "company",
+  "department",
+  "sb_investigation",
+  "investigation_date",
   "status",
-  "employee"
+  "cb_investigation_1",
+  "investigator",
+  "investigator_name",
+  "sb_findings",
+  "findings",
+  "sb_conclusion",
+  "conclusion"
  ],
  "fields": [
   {
@@ -26,48 +37,28 @@
    "options": "HR-INV-.YYYY.-.#####"
   },
   {
-   "fieldname": "investigation_date",
-   "fieldtype": "Date",
-   "in_list_view": 1,
-   "label": "Investigation Date",
-   "reqd": 1
+   "fieldname": "sb_reference",
+   "fieldtype": "Section Break",
+   "label": "Reference"
   },
   {
    "fieldname": "incident_ref",
    "fieldtype": "Link",
-   "label": "Incident Ref",
+   "in_list_view": 1,
+   "label": "Disciplinary Incident",
    "options": "Disciplinary Incident"
   },
   {
    "fieldname": "grievance_ref",
    "fieldtype": "Link",
-   "label": "Grievance Ref",
+   "in_list_view": 1,
+   "label": "Disciplinary Grievance",
    "options": "Disciplinary Grievance"
   },
   {
-   "fieldname": "investigator",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Investigator",
-   "options": "Employee",
-   "reqd": 1
-  },
-  {
-   "fieldname": "findings",
-   "fieldtype": "Text Editor",
-   "label": "Findings"
-  },
-  {
-   "fieldname": "conclusion",
-   "fieldtype": "Text Editor",
-   "label": "Conclusion"
-  },
-  {
-   "default": "Ongoing",
-   "fieldname": "status",
-   "fieldtype": "Select",
-   "label": "Status",
-   "options": "Ongoing\nCompleted"
+   "fieldname": "sb_employee",
+   "fieldtype": "Section Break",
+   "label": "Employee Details"
   },
   {
    "fieldname": "employee",
@@ -76,6 +67,92 @@
    "label": "Employee",
    "options": "Employee",
    "reqd": 1
+  },
+  {
+   "fetch_from": "employee.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Employee Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb_employee_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "employee.company",
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.department",
+   "fieldname": "department",
+   "fieldtype": "Link",
+   "label": "Department",
+   "options": "Department",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sb_investigation",
+   "fieldtype": "Section Break",
+   "label": "Investigation Details"
+  },
+  {
+   "fieldname": "investigation_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Investigation Date",
+   "reqd": 1
+  },
+  {
+   "default": "Ongoing",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Ongoing\nCompleted"
+  },
+  {
+   "fieldname": "cb_investigation_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "investigator",
+   "fieldtype": "Link",
+   "label": "Investigator",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "investigator.employee_name",
+   "fieldname": "investigator_name",
+   "fieldtype": "Data",
+   "label": "Investigator Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sb_findings",
+   "fieldtype": "Section Break",
+   "label": "Findings"
+  },
+  {
+   "fieldname": "findings",
+   "fieldtype": "Text Editor",
+   "label": "Findings"
+  },
+  {
+   "fieldname": "sb_conclusion",
+   "fieldtype": "Section Break",
+   "label": "Conclusion"
+  },
+  {
+   "fieldname": "conclusion",
+   "fieldtype": "Text Editor",
+   "label": "Conclusion"
   }
  ],
  "grid_page_length": 50,

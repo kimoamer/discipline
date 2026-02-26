@@ -6,7 +6,7 @@ def get_data():
 		'transactions': [
 			{
 				'label': _('Process'),
-				'items': ['Disciplinary Investigation']
+				'items': ['Disciplinary Investigation', 'Restorative Mediation']
 			}
 		]
 	}

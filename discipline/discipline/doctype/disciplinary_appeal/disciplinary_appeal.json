@@ -7,19 +7,33 @@
     "editable_grid": 1,
     "engine": "InnoDB",
     "field_order": [
+        "sb_reference",
         "disciplinary_incident",
+        "cb_reference_1",
         "employee",
+        "employee_name",
+        "sb_employee_detail",
+        "company",
+        "cb_employee_detail_1",
+        "department",
+        "sb_appeal",
         "date_of_appeal",
-        "reviewer",
         "status",
-        "sb_1",
+        "cb_appeal_1",
+        "reviewer",
+        "reviewer_name",
+        "sb_appeal_details",
         "appeal_reason",
-        "sb_2",
+        "sb_decision",
         "final_decision_notes",
-        "amended_from",
         "amended_from"
     ],
     "fields": [
+        {
+            "fieldname": "sb_reference",
+            "fieldtype": "Section Break",
+            "label": "Reference"
+        },
         {
             "fieldname": "disciplinary_incident",
             "fieldtype": "Link",
@@ -29,12 +43,57 @@
             "reqd": 1
         },
         {
+            "fieldname": "cb_reference_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fetch_from": "disciplinary_incident.employee",
             "fieldname": "employee",
             "fieldtype": "Link",
             "in_list_view": 1,
             "label": "Employee",
             "options": "Employee",
+            "read_only": 1,
             "reqd": 1
+        },
+        {
+            "fetch_from": "employee.employee_name",
+            "fieldname": "employee_name",
+            "fieldtype": "Data",
+            "in_list_view": 1,
+            "label": "Employee Name",
+            "read_only": 1
+        },
+        {
+            "fieldname": "sb_employee_detail",
+            "fieldtype": "Section Break",
+            "label": "Employee Details",
+            "collapsible": 1
+        },
+        {
+            "fetch_from": "employee.company",
+            "fieldname": "company",
+            "fieldtype": "Link",
+            "label": "Company",
+            "options": "Company",
+            "read_only": 1
+        },
+        {
+            "fieldname": "cb_employee_detail_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fetch_from": "employee.department",
+            "fieldname": "department",
+            "fieldtype": "Link",
+            "label": "Department",
+            "options": "Department",
+            "read_only": 1
+        },
+        {
+            "fieldname": "sb_appeal",
+            "fieldtype": "Section Break",
+            "label": "Appeal Information"
         },
         {
             "default": "Today",
@@ -45,13 +104,6 @@
             "reqd": 1
         },
         {
-            "fieldname": "reviewer",
-            "fieldtype": "Link",
-            "in_list_view": 1,
-            "label": "Reviewer",
-            "options": "Employee"
-        },
-        {
             "default": "Pending",
             "fieldname": "status",
             "fieldtype": "Select",
@@ -60,7 +112,24 @@
             "options": "Pending\nUpheld\nOverturned\nModified"
         },
         {
-            "fieldname": "sb_1",
+            "fieldname": "cb_appeal_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "reviewer",
+            "fieldtype": "Link",
+            "label": "Reviewer",
+            "options": "Employee"
+        },
+        {
+            "fetch_from": "reviewer.employee_name",
+            "fieldname": "reviewer_name",
+            "fieldtype": "Data",
+            "label": "Reviewer Name",
+            "read_only": 1
+        },
+        {
+            "fieldname": "sb_appeal_details",
             "fieldtype": "Section Break",
             "label": "Appeal Details"
         },
@@ -71,7 +140,7 @@
             "reqd": 1
         },
         {
-            "fieldname": "sb_2",
+            "fieldname": "sb_decision",
             "fieldtype": "Section Break",
             "label": "Decision"
         },
@@ -79,15 +148,6 @@
             "fieldname": "final_decision_notes",
             "fieldtype": "Text",
             "label": "Final Decision Notes"
-        },
-        {
-            "fieldname": "amended_from",
-            "fieldtype": "Link",
-            "label": "Amended From",
-            "no_copy": 1,
-            "options": "Disciplinary Appeal",
-            "print_hide": 1,
-            "read_only": 1
         },
         {
             "fieldname": "amended_from",

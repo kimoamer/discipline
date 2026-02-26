@@ -2,6 +2,33 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on("Disciplinary Incident", {
+    setup: function (frm) {
+        frm.set_query("offence", function () {
+            return {
+                filters: { is_active: 1 }
+            };
+        });
+        frm.set_query("reported_by", function () {
+            return {
+                filters: { status: "Active" }
+            };
+        });
+        frm.set_query("recommended_salary_component", function () {
+            return {
+                filters: { type: "Deduction" }
+            };
+        });
+        frm.set_query("final_salary_component", function () {
+            return {
+                filters: { type: "Deduction" }
+            };
+        });
+        frm.set_query("payroll_period", function () {
+            return {
+                filters: { company: frm.doc.company }
+            };
+        });
+    },
     employee: function (frm) {
         get_recommendation(frm);
     },
@@ -10,22 +37,6 @@ frappe.ui.form.on("Disciplinary Incident", {
     },
     incident_date: function (frm) {
         get_recommendation(frm);
-    },
-    setup: function (frm) {
-        frm.set_query("recommended_salary_component", function () {
-            return {
-                filters: {
-                    type: "Deduction"
-                }
-            };
-        });
-        frm.set_query("final_salary_component", function () {
-            return {
-                filters: {
-                    type: "Deduction"
-                }
-            };
-        });
     }
 });
 

@@ -1,9 +1,11 @@
-# Copyright (c) 2026, Hak3em and contributors
-# For license information, please see license.txt
-
-# import frappe
+import frappe
 from frappe.model.document import Document
 
 
 class DisciplinaryGrievance(Document):
-	pass
+    def validate(self):
+        self.validate_parties()
+
+    def validate_parties(self):
+        if self.against_employee and self.against_employee == self.employee:
+            frappe.throw("The grievance cannot be filed against the same employee who is filing it.")
