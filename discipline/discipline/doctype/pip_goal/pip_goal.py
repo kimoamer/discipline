@@ -5,5 +5,5 @@
 from frappe.model.document import Document
 
 
-class OffencePenalty(Document):
+class PIPGoal(Document):
 	pass

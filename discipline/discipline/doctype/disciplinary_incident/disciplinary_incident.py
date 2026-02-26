@@ -43,7 +43,12 @@ class DisciplinaryIncident(Document):
     def compute_occurrence_and_recommendation(self):
         settings = frappe.get_single("Discipline Settings")
         window_months = settings.occurrence_window_months or 12
+        
         max_level = settings.max_occurrence_level or 5
+        if self.offence:
+            offence_max = frappe.db.get_value("Offence", self.offence, "max_occurrence_level")
+            if offence_max:
+                max_level = int(offence_max)
         
         start_date = add_months(self.incident_date, -window_months)
         
@@ -128,8 +133,12 @@ def get_recommendation(employee, offence, incident_date, docname=None):
         return {}
     settings = frappe.get_single("Discipline Settings")
     window_months = settings.occurrence_window_months or 12
-    max_level = settings.max_occurrence_level or 5
     
+    max_level = settings.max_occurrence_level or 5
+    offence_max = frappe.db.get_value("Offence", offence, "max_occurrence_level")
+    if offence_max:
+        max_level = int(offence_max)
+        
     start_date = add_months(incident_date, -window_months)
     
     filters = {

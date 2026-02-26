@@ -1,182 +1,182 @@
 {
- "actions": [],
- "allow_rename": 1,
- "autoname": "HR-INC-.YYYY.-.#####",
- "creation": "2026-02-21 16:26:00.404008",
- "doctype": "DocType",
- "editable_grid": 1,
- "engine": "InnoDB",
- "field_order": [
-  "employee",
-  "company",
-  "offence",
-  "incident_date",
-  "details",
-  "attachments",
-  "sb_computed",
-  "occurrence_no",
-  "recommended_penalty_text",
-  "recommended_days_deducted",
-  "recommended_salary_component",
-  "sb_final",
-  "final_penalty_text",
-  "final_days_deducted",
-  "final_salary_component",
-  "sb_integration",
-  "additional_salary_ref",
-  "payroll_period",
-  "amended_from"
- ],
- "fields": [
-  {
-   "fieldname": "employee",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Employee",
-   "options": "Employee",
-   "reqd": 1
-  },
-  {
-   "fetch_from": "employee.company",
-   "fieldname": "company",
-   "fieldtype": "Link",
-   "label": "Company",
-   "options": "Company"
-  },
-  {
-   "fieldname": "offence",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Offence",
-   "options": "Offence",
-   "reqd": 1
-  },
-  {
-   "fieldname": "incident_date",
-   "fieldtype": "Date",
-   "in_list_view": 1,
-   "label": "Incident Date",
-   "reqd": 1
-  },
-  {
-   "fieldname": "details",
-   "fieldtype": "Text",
-   "label": "Details"
-  },
-  {
-   "fieldname": "attachments",
-   "fieldtype": "Attach",
-   "label": "Attachments"
-  },
-  {
-   "fieldname": "sb_computed",
-   "fieldtype": "Section Break",
-   "label": "Computed Information"
-  },
-  {
-   "fieldname": "occurrence_no",
-   "fieldtype": "Int",
-   "label": "Occurrence No",
-   "read_only": 1
-  },
-  {
-   "fieldname": "recommended_penalty_text",
-   "fieldtype": "Small Text",
-   "label": "Recommended Penalty Text",
-   "read_only": 1
-  },
-  {
-   "fieldname": "recommended_days_deducted",
-   "fieldtype": "Float",
-   "label": "Recommended Days Deducted",
-   "read_only": 1
-  },
-  {
-   "fieldname": "recommended_salary_component",
-   "fieldtype": "Link",
-   "label": "Recommended Salary Component",
-   "options": "Salary Component",
-   "read_only": 1
-  },
-  {
-   "fieldname": "sb_final",
-   "fieldtype": "Section Break",
-   "label": "Final Decision"
-  },
-  {
-   "fieldname": "final_penalty_text",
-   "fieldtype": "Small Text",
-   "label": "Final Penalty Text"
-  },
-  {
-   "fieldname": "final_days_deducted",
-   "fieldtype": "Float",
-   "label": "Final Days Deducted"
-  },
-  {
-   "fieldname": "final_salary_component",
-   "fieldtype": "Link",
-   "label": "Final Salary Component",
-   "options": "Salary Component"
-  },
-  {
-   "fieldname": "sb_integration",
-   "fieldtype": "Section Break",
-   "label": "Integration"
-  },
-  {
-   "fieldname": "additional_salary_ref",
-   "fieldtype": "Link",
-   "label": "Additional Salary Ref",
-   "options": "Additional Salary",
-   "read_only": 1
-  },
-  {
-   "fieldname": "payroll_period",
-   "fieldtype": "Link",
-   "label": "Payroll Period",
-   "options": "Payroll Period"
-  },
-  {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Disciplinary Incident",
-   "print_hide": 1,
-   "read_only": 1,
-   "search_index": 1
-  }
- ],
- "grid_page_length": 50,
- "index_web_pages_for_search": 1,
- "is_submittable": 1,
- "links": [],
- "modified": "2026-02-21 16:26:00.404008",
- "modified_by": "Administrator",
- "module": "Discipline",
- "name": "Disciplinary Incident",
- "owner": "Administrator",
- "permissions": [
-  {
-   "amend": 1,
-   "cancel": 1,
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "System Manager",
-   "share": 1,
-   "submit": 1,
-   "write": 1
-  }
- ],
- "row_format": "Dynamic",
- "rows_threshold_for_grid_search": 20,
- "sort_field": "modified",
- "sort_order": "DESC",
- "states": []
+    "actions": [],
+    "allow_rename": 1,
+    "autoname": "HR-INC-.YYYY.-.#####",
+    "creation": "2026-02-21 16:26:00.404008",
+    "doctype": "DocType",
+    "editable_grid": 1,
+    "engine": "InnoDB",
+    "field_order": [
+        "employee",
+        "company",
+        "offence",
+        "incident_date",
+        "details",
+        "attachments",
+        "sb_computed",
+        "occurrence_no",
+        "recommended_penalty_text",
+        "recommended_days_deducted",
+        "recommended_salary_component",
+        "sb_final",
+        "final_penalty_text",
+        "final_days_deducted",
+        "final_salary_component",
+        "sb_integration",
+        "additional_salary_ref",
+        "payroll_period",
+        "amended_from"
+    ],
+    "fields": [
+        {
+            "fieldname": "employee",
+            "fieldtype": "Link",
+            "in_list_view": 1,
+            "label": "Employee",
+            "options": "Employee",
+            "reqd": 1
+        },
+        {
+            "fetch_from": "employee.company",
+            "fieldname": "company",
+            "fieldtype": "Link",
+            "label": "Company",
+            "options": "Company"
+        },
+        {
+            "fieldname": "offence",
+            "fieldtype": "Link",
+            "in_list_view": 1,
+            "label": "Offence",
+            "options": "Offence",
+            "reqd": 1
+        },
+        {
+            "fieldname": "incident_date",
+            "fieldtype": "Date",
+            "in_list_view": 1,
+            "label": "Incident Date",
+            "reqd": 1
+        },
+        {
+            "fieldname": "details",
+            "fieldtype": "Text",
+            "label": "Details"
+        },
+        {
+            "fieldname": "attachments",
+            "fieldtype": "Attach",
+            "label": "Attachments"
+        },
+        {
+            "fieldname": "sb_computed",
+            "fieldtype": "Section Break",
+            "label": "Computed Information"
+        },
+        {
+            "fieldname": "occurrence_no",
+            "fieldtype": "Int",
+            "label": "Occurrence No",
+            "read_only": 1
+        },
+        {
+            "fieldname": "recommended_penalty_text",
+            "fieldtype": "Small Text",
+            "label": "Recommended Penalty Text",
+            "read_only": 1
+        },
+        {
+            "fieldname": "recommended_days_deducted",
+            "fieldtype": "Float",
+            "label": "Recommended Days Deducted",
+            "read_only": 1
+        },
+        {
+            "fieldname": "recommended_salary_component",
+            "fieldtype": "Link",
+            "label": "Recommended Salary Component",
+            "options": "Salary Component",
+            "read_only": 1
+        },
+        {
+            "fieldname": "sb_final",
+            "fieldtype": "Section Break",
+            "label": "Final Decision"
+        },
+        {
+            "fieldname": "final_penalty_text",
+            "fieldtype": "Small Text",
+            "label": "Final Penalty Text"
+        },
+        {
+            "fieldname": "final_days_deducted",
+            "fieldtype": "Float",
+            "label": "Final Days Deducted"
+        },
+        {
+            "fieldname": "final_salary_component",
+            "fieldtype": "Link",
+            "label": "Final Salary Component",
+            "options": "Salary Component"
+        },
+        {
+            "fieldname": "sb_integration",
+            "fieldtype": "Section Break",
+            "label": "Integration"
+        },
+        {
+            "fieldname": "additional_salary_ref",
+            "fieldtype": "Link",
+            "label": "Additional Salary Ref",
+            "options": "Additional Salary",
+            "read_only": 1
+        },
+        {
+            "fieldname": "payroll_period",
+            "fieldtype": "Link",
+            "label": "Payroll Period",
+            "options": "Payroll Period"
+        },
+        {
+            "fieldname": "amended_from",
+            "fieldtype": "Link",
+            "label": "Amended From",
+            "no_copy": 1,
+            "options": "Disciplinary Incident",
+            "print_hide": 1,
+            "read_only": 1,
+            "search_index": 1
+        }
+    ],
+    "grid_page_length": 50,
+    "index_web_pages_for_search": 1,
+    "is_submittable": 1,
+    "links": [],
+    "modified": "2026-02-21 16:26:00.404008",
+    "modified_by": "Administrator",
+    "module": "Discipline",
+    "name": "Disciplinary Incident",
+    "owner": "Administrator",
+    "permissions": [
+        {
+            "amend": 1,
+            "cancel": 1,
+            "create": 1,
+            "delete": 1,
+            "email": 1,
+            "export": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "System Manager",
+            "share": 1,
+            "submit": 1,
+            "write": 1
+        }
+    ],
+    "row_format": "Dynamic",
+    "rows_threshold_for_grid_search": 20,
+    "sort_field": "modified",
+    "sort_order": "DESC",
+    "states": []
 }

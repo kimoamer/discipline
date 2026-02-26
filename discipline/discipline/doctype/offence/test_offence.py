@@ -1,4 +1,4 @@
-# Copyright (c) 2026, RootRise and Contributors
+# Copyright (c) 2026, Hak3em and Contributors
 # See license.txt
 
 # import frappe

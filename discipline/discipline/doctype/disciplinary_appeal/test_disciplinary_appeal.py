@@ -5,5 +5,5 @@
 from frappe.tests.utils import FrappeTestCase
 
 
-class TestDisciplinaryIncident(FrappeTestCase):
+class TestDisciplinaryAppeal(FrappeTestCase):
 	pass
