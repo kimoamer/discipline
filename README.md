@@ -14,23 +14,29 @@ To achieve this, the app now separates investigations from penalties and allows 
 
 ### System Flow
 ```text
-  +-----------------------+       +----------------------------+
-  | Disciplinary Grievance| ----> | Disciplinary Investigation |
-  | (Employee Voice)      |       | (Fact-Finding & Evidence)  |
-  +-----------+-----------+       +-------------+--------------+
-              |                                 |
-              |       +-------------------------+
-              |       |
-              v       v
-  +-------------------------+     +--------------------------+
-  | Disciplinary Incident   |     | Restorative Mediation    |
-  | (Formal Record/Penalty) | OR  | (Relationship Repair)    |
-  +-----------+-------------+     +--------------------------+
+  +-------------------------+
+  | Incident Submitted      |
+  +-----------+-------------+
               |
               v
   +-------------------------+
-  | Payroll Integration     |
-  | (Additional Salary)     |
+  | Employee Acknowledgment |
+  +-----------+-------------+
+              |
+              v
+  +-------------------------+
+  | Appeal                  |
+  | (if employee disagrees) |
+  +-----------+-------------+
+              |
+              v
+  +-------------------------+
+  | HR Review               |
+  +-----------+-------------+
+              |
+              v
+  +-------------------------+
+  | Final Decision          |
   +-------------------------+
 ```
 
