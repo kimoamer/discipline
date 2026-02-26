@@ -33,7 +33,7 @@
             "fieldtype": "Link",
             "in_list_view": 1,
             "label": "Employee",
-            "options": "User",
+            "options": "Employee",
             "reqd": 1
         },
         {
@@ -49,7 +49,7 @@
             "fieldtype": "Link",
             "in_list_view": 1,
             "label": "Reviewer",
-            "options": "User"
+            "options": "Employee"
         },
         {
             "default": "Pending",
