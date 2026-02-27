@@ -69,6 +69,7 @@ Search for **Offence** and click **Add Offence**.
 | **Company** | (Optional) Restrict this offence to a specific company. |
 | **Is Active** | Only active offences appear in incident forms. |
 | **Max Occurrence Level** | Per-offence override for the global max level from settings. |
+| **On Max Exceeded** | Controls what happens when the employee exceeds the max occurrence level. **Apply Last Penalty** (default): keeps applying the highest-level penalty on every subsequent incident. **Block New Incidents**: prevents recording any further incidents for this offence/employee combination. Only visible when Max Occurrence Level is set. |
 
 ### Penalty Matrix (child table)
 

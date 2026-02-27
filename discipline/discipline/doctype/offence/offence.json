@@ -12,6 +12,7 @@
         "company",
         "is_active",
         "max_occurrence_level",
+        "on_max_exceeded",
         "penalties"
     ],
     "fields": [
@@ -46,6 +47,15 @@
             "fieldtype": "Int",
             "label": "Max Occurrence Level",
             "description": "Overrides the global max occurrence level from Discipline Settings."
+        },
+        {
+            "default": "Apply Last Penalty",
+            "depends_on": "max_occurrence_level",
+            "description": "What happens when an employee exceeds the max occurrence level for this offence.<br><b>Block New Incidents</b>: Prevents creating further incidents.<br><b>Apply Last Penalty</b>: Keeps applying the highest-level penalty.",
+            "fieldname": "on_max_exceeded",
+            "fieldtype": "Select",
+            "label": "On Max Exceeded",
+            "options": "Apply Last Penalty\nBlock New Incidents"
         },
         {
             "fieldname": "penalties",

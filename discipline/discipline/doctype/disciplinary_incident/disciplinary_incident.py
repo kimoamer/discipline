@@ -45,10 +45,15 @@ class DisciplinaryIncident(Document):
         window_months = settings.occurrence_window_months or 12
         
         max_level = settings.max_occurrence_level or 5
+        on_max_exceeded = "Apply Last Penalty"
         if self.offence:
-            offence_max = frappe.db.get_value("Offence", self.offence, "max_occurrence_level")
+            offence_max, offence_on_max = frappe.db.get_value(
+                "Offence", self.offence, ["max_occurrence_level", "on_max_exceeded"]
+            ) or (None, None)
             if offence_max:
                 max_level = int(offence_max)
+            if offence_on_max:
+                on_max_exceeded = offence_on_max
         
         start_date = add_months(self.incident_date, -window_months)
         
@@ -61,7 +66,16 @@ class DisciplinaryIncident(Document):
             "name": ("!=", self.name)
         })
         
-        computed_occurrence = min(count + 1, max_level)
+        raw_occurrence = count + 1
+
+        if raw_occurrence > max_level and on_max_exceeded == "Block New Incidents":
+            frappe.throw(
+                f"Max occurrence level ({max_level}) exceeded for offence "
+                f"{self.offence}. No further incidents can be recorded for "
+                f"employee {self.employee_name or self.employee}."
+            )
+        
+        computed_occurrence = min(raw_occurrence, max_level)
         self.occurrence_no = computed_occurrence
         
         if self.offence:
@@ -135,9 +149,14 @@ def get_recommendation(employee, offence, incident_date, docname=None):
     window_months = settings.occurrence_window_months or 12
     
     max_level = settings.max_occurrence_level or 5
-    offence_max = frappe.db.get_value("Offence", offence, "max_occurrence_level")
+    on_max_exceeded = "Apply Last Penalty"
+    offence_max, offence_on_max = frappe.db.get_value(
+        "Offence", offence, ["max_occurrence_level", "on_max_exceeded"]
+    ) or (None, None)
     if offence_max:
         max_level = int(offence_max)
+    if offence_on_max:
+        on_max_exceeded = offence_on_max
         
     start_date = add_months(incident_date, -window_months)
     
@@ -151,8 +170,17 @@ def get_recommendation(employee, offence, incident_date, docname=None):
         filters["name"] = ("!=", docname)
 
     count = frappe.db.count("Disciplinary Incident", filters)
+    raw_occurrence = count + 1
+
+    if raw_occurrence > max_level and on_max_exceeded == "Block New Incidents":
+        employee_name = frappe.db.get_value("Employee", employee, "employee_name") or employee
+        return {
+            "blocked": True,
+            "message": f"Max occurrence level ({max_level}) exceeded for this offence. "
+                       f"No further incidents can be recorded for {employee_name}."
+        }
     
-    computed_occurrence = min(count + 1, max_level)
+    computed_occurrence = min(raw_occurrence, max_level)
     
     offence_doc = frappe.get_doc("Offence", offence)
     penalty = next((p for p in offence_doc.penalties if p.occurrence_no == computed_occurrence), None)

@@ -52,6 +52,15 @@ function get_recommendation(frm) {
             },
             callback: function (r) {
                 if (r.message) {
+                    if (r.message.blocked) {
+                        frappe.msgprint({
+                            title: __("Blocked"),
+                            indicator: "red",
+                            message: r.message.message
+                        });
+                        frm.set_value("offence", "");
+                        return;
+                    }
                     frappe.model.set_value(frm.doctype, frm.docname, "occurrence_no", r.message.occurrence_no);
                     frappe.model.set_value(frm.doctype, frm.docname, "recommended_penalty_text", r.message.recommended_penalty_text);
                     frappe.model.set_value(frm.doctype, frm.docname, "recommended_days_deducted", r.message.recommended_days_deducted);
